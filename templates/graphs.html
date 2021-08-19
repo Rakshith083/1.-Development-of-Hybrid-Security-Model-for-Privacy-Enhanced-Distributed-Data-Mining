@@ -1,0 +1,244 @@
+<html>
+    <head>
+        <title>Graphs</title>
+        <style>
+                    html {
+                    background-image: linear-gradient(to bottom right, rgb(12, 49, 214), rgba(201, 20, 201, 0.904));
+                min-height: 100%;
+                }
+          .divScroll {
+              overflow:scroll;
+              height:1.5cm;
+              width:20cm;
+              color: white; 
+              background-color: rgb(15, 15, 94);
+              font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+              }
+          input[type=text] {
+                  padding: 10px 20px;
+                  margin: 8px 0;
+                  box-sizing: border-box;
+                  border: 3px solid #ccc;
+                  -webkit-transition: 0.5s;
+                  transition: 0.5s;
+                  outline: none;
+                  }
+  
+                  input[type=text]:focus {
+                  border: 3px solid #555;
+                  }
+                  .w3-btn {width:150px;}
+      </style>
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+            #customers {
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+              }
+      
+              #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+              }
+      
+              #customers tr:nth-child(even){background-color: #f2f2f2;}
+      
+              #customers tr:hover {background-color: #ddd;}
+      
+              #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #04AA6D;
+                color: white;
+              }
+              .topnav {
+                overflow: hidden;
+                background-color: #333;
+              }
+              
+              .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+              }
+              
+              .topnav a:hover {
+                background-color: #ddd;
+                color: black;
+              }
+              
+              .topnav a.active {
+                background-color: #2dc560d8;
+                color: #f2f2f2;
+              }
+              .tabcap:hover{
+                border-radius: 25px;
+                background: #333;
+                color: whitesmoke; 
+                width: 200px;
+                height: 32px;
+                font-size: 25px;
+              }
+              .tabcap{
+                border-radius: 25px;
+                background: rgb(233, 232, 232);
+                color: #333; 
+                width: 200px;
+                height: 32px;
+                font-size: 25px;
+              }
+              .pos{
+                  padding-left: 2cm;
+                  padding-right: 2cm;
+              }
+              </style> 
+              <style>
+                .open-button {
+                  background-color: #555;
+                  color: white;
+                  padding: 16px 20px;
+                  border: none;
+                  cursor: pointer;
+                  opacity: 0.8;
+                  position: fixed;
+                  bottom: 23px;
+                  right: 28px;
+                  width: 280px;
+                }
+
+                /* The popup form - hidden by default */
+                .form-popup {
+                  background-color: #333;
+                  border: 3px solid rgb(37, 37, 37);
+                  display: none;
+                  position: fixed;
+                  top: 1.8cm;
+                  left: 8cm;
+                  z-index: 9;
+                }
+
+                /* Add styles to the form container */
+                .form-container {
+                  max-width: 650px;
+                  padding: 10px;
+                  background-image: linear-gradient(to bottom right, rgb(12, 49, 214), rgba(201, 20, 201, 0.904));
+                  min-height: 100%;
+                  color: #ffffff;
+                }
+ 
+                /* Full-width input fields */
+                .form-container input[type=number] {
+                  width: 100%;
+                  padding: 15px;
+                  margin: 5px 0 22px 0;
+                  border: none;
+                  background: white;
+                }
+
+                /* When the inputs get focus, do something */
+                .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+                  background-color: #ddd;
+                  outline: none;
+                }
+
+                /* Set a style for the submit/login button */
+                .form-container .btn {
+                  background-color: #04AA6D;
+                  color: white;
+                  padding: 16px 20px;
+                  border: none;
+                  cursor: pointer;
+                  width: 100%;
+                  margin-bottom:10px;
+                  opacity: 0.8;
+                }
+
+                /* Add a red background color to the cancel button */
+                .form-container .cancel {
+                  background-color: #333;
+                }
+
+                /* Add some hover effects to buttons */
+                .form-container .btn:hover, .open-button:hover {
+                  opacity: 1;
+                }
+              </style>
+              <script>
+                function openForm() {
+                  document.getElementById("myForm").style.display = "block";
+                }
+                
+                function closeForm() {
+                  document.getElementById("myForm").style.display = "none";
+                }
+                function check() {
+                  var a=document.getElementById("alpha").value;
+                  var b=document.getElementById("beta").value;
+                  if (a==360){
+                    document.getElementById("alpha").value=0;
+                  }
+                  else if(b==360){
+                    document.getElementById("beta").value=0;
+                  }
+                  else if (a>360 || b>360){
+                    window.alert("Angles must be in 0°-360°");
+                    return false;
+                  }
+                }
+                </script>
+    </head>
+    <body>
+        <div class="topnav">
+            <a class="active" href="#home">Rotated Data</a>
+            <a href="/getdata">New DataSet</a>
+            <a href="#/aplha-beta angle" onclick="openForm()">Continue</a>
+          </div> 
+          <div class="form-popup" id="myForm">
+            <form action="/continue" class="form-container" method="POST">
+              <table style="color:#ffffff">
+                <tr>
+                  <td>
+                    Enter Alpha angle
+                  </td>
+                  <td><input type="number" name="alpha" id=alpha placeholder="Alpha angle" required></td>
+                </tr>
+                <tr>
+                  <td>
+                    Enter Beta angle
+                  </td>
+                  <td><input type="number" name="beta" id=beta placeholder="Beta angle"  required></td>
+                  <tr>
+                    <td><center><button type="submit" class="w3-button w3-round-xlarge" style="background-color: #333; color: whitesmoke;"  onclick="return check()">Rotate</button></center></td>
+                    <td><center><button type="button" class="w3-button w3-round-xlarge" style="background-color: #333; color: whitesmoke;" onclick="closeForm()">Close</button></center></td>
+                  </tr>
+                </tr>
+              </table>
+            </form>
+          </div>
+          <center>
+            <div><br>
+              <table>
+                <caption><strong style="color:rgb(255, 255, 255); font-size: 35px; padding-top: 0.5cm;"> Graphs </strong> <hr></caption>
+              <tr>
+                <td style="color: rgb(255, 255, 255); font-size: 25px; "><center>Alpha Graphs</center></td>
+                <td style="color: rgb(255, 255, 255); font-size: 25px; "><center>Beta Graphs</center></td>
+              </tr>
+                {% for i,j in zip(Ag,Bg) %} 
+                <tr>
+                  <td>
+                    <img src="static/{{i}}" alt="{{i}}" width="715" height="362">
+                  </td>
+                  <td>
+                    <img src="static/{{j}}" alt="{{j}}" width="715" height="362">
+                  </td>
+            </tr>
+              {% endfor %}
+            </table>
+            </div>
+    </body>
+</html>
